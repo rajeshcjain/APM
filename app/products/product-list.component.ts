@@ -1,14 +1,15 @@
-import {Component} from '@angular/core';
+import {Component,OnInit} from '@angular/core';
 
 import { IProduct } from './product'
 
 @Component({
     selector: 'pm-product',
-    templateUrl : 'app/products/product-list.component.html',
-    styleUrls : ['app/products/product-list.component.css']
+    moduleId: module.id,
+    templateUrl : 'product-list.component.html',
+    styleUrls: ['product-list.component.css']
 })
 
-export class ProductComponentList{
+export class ProductComponentList implements OnInit{
     productList: string = 'Product List'
     imageWidth:number = 50;
     imageMargin:number = 2;
@@ -68,6 +69,17 @@ export class ProductComponentList{
 ];
 
 toggleImage(): void {
+    console.log("In toggleImage ");
     this.showImage = !this.showImage;
 }
+
+ngOnInit():void {
+    console.log("In Oninit Hook")
+}
+
+//This is the function to absorbe the data receieved from the star component.
+onRatingClicked(msg : string):void {
+    this.productList = 'Product List : ' + msg; 
+}
+
 }

@@ -34,20 +34,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor='let product of products'>
+                    <tr *ngFor='let product of products | productFilter : listFilter'>
                         <td>
                             <img *ngIf='showImage' [src]='product.imageUrl'
-                             [title]='product.productName' 
+                             [title]='product.productName | uppercase' 
                              [style.width.px]='imageWidth' 
                              [style.margin.px]='imageMargin'
                              >
                         </td>
-                                            
+                        
                         <td>{{product.productName | uppercase}}</td>
                         <td>{{product.productCode}}</td>
                         <td>{{product.releaseDate}}</td>
                         <td>{{product.price | currency:'USD':true:'1.2-2' | uppercase}}</td>
-                        <td>{{product.starRating}}</td>
+                        <!--
+                            The product want to listen to ratingClicked event from the star component.so we 
+                            here we bind the ratingClicked exposed by the star component with the onRatingClicked function which
+                            is the part of the product component.
+                            $event is used for getting the event payload from the star component.
+                            Here we listen to ratingClicked and we get the ratingClicked and then get the payload as $event.
+                            
+                        -->
+                        <td><ai-star [rating]='product.starRating'
+                               (ratingClicked)='onRatingClicked($event)'></ai-star></td>
                     </tr>
                 </tbody>
             </table>

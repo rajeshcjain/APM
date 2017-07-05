@@ -68,15 +68,24 @@ var ProductComponentList = (function () {
         ];
     }
     ProductComponentList.prototype.toggleImage = function () {
+        console.log("In toggleImage ");
         this.showImage = !this.showImage;
+    };
+    ProductComponentList.prototype.ngOnInit = function () {
+        console.log("In Oninit Hook");
+    };
+    //This is the function to absorbe the data receieved from the star component.
+    ProductComponentList.prototype.onRatingClicked = function (msg) {
+        this.productList = 'Product List : ' + msg;
     };
     return ProductComponentList;
 }());
 ProductComponentList = __decorate([
     core_1.Component({
         selector: 'pm-product',
-        templateUrl: 'app/products/product-list.component.html',
-        styleUrls: ['app/products/product-list.component.css']
+        moduleId: module.id,
+        templateUrl: 'product-list.component.html',
+        styleUrls: ['product-list.component.css']
     })
 ], ProductComponentList);
 exports.ProductComponentList = ProductComponentList;
